@@ -1,8 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-
 const TODO_FILE = path.join(__dirname, "todo.json");
-
 function readTodos() {
   const data = fs.readFileSync(TODO_FILE, "utf-8");
   return JSON.parse(data);
@@ -14,7 +12,6 @@ function writeTodos(todos) {
 
 function addTodo(task) {
 const todos =readTodos();
-
 const newTodo = {
 id:Date.now(),
     task,
