@@ -1,5 +1,4 @@
 const http = require("http");
-
 const server = http.createServer((req, res) => {
   if (req.method === "GET" && req.url === "/user") {
     const user = {
@@ -10,9 +9,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, {
       "Content-Type": "application/json"
     });
-
     res.end(JSON.stringify(user));
-
   } else {
     res.writeHead(404, {
       "Content-Type": "text/plain"
@@ -21,7 +18,6 @@ const server = http.createServer((req, res) => {
     res.end("Route Not Found");
   }
 });
-
 server.listen(3000, () => {
   console.log("Server running at http://localhost:3000");
 });
