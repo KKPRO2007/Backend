@@ -1,6 +1,7 @@
 const path = require("path");
 const os = require("os");
 
+
 // ===== PATH MODULE =====
 console.log("---- PATH MODULE ----");
 
