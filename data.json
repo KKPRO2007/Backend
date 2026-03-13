@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "KK",
+    "course": "Node"
+  },
+  {
+    "id": 2,
+    "name": "KK",
+    "course": "NodeJS"
+  },
+  {
+    "id": 3,
+    "name": "delete",
+    "course": "NodeJS"
+  },
+  {
+    "id": 4,
+    "name": "delete",
+    "course": "NodeJS"
+  }
+]
