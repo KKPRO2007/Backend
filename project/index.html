@@ -1,29 +1,20 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>Student ID Tracker</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-
 <body>
-
-<h1>Student ID Tracker</h1>
-
-<div class="form">
-
-<input id="name" placeholder="Name">
-<input id="course" placeholder="Course">
-<input id="email" placeholder="Email">
-
-<button onclick="addStudent()">Add Student</button>
-
-</div>
-
-<div id="students" class="grid"></div>
-
-<script src="script.js"></script>
+    <h2> USer</h2>
+    <input id="id" >
+     <input id="name" >
+      <input id="course" >
+        <button onclick="add()">Add</button>
+        <br>
+         <button onclick="load()">Load</button>
+     <ui id="list"></ui>
+     <script src="server.js"></script>
 
 </body>
-
 </html>
