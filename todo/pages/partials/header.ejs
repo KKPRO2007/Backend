@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= typeof pageTitle !== "undefined" ? pageTitle : "TaskMate" %></title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-icon">✦</span>
+      <span class="brand-name">TaskMate</span>
+    </div>
+    <% if (typeof email !== "undefined" && email) { %>
+      <nav class="header-nav">
+        <span class="user-pill"><%= email %></span>
+        <a href="/account/logout" class="btn btn-ghost btn-sm">Sign out</a>
+      </nav>
+    <% } %>
+  </header>
+  <main class="page-content">

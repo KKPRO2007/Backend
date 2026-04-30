@@ -1,0 +1,84 @@
+<%- include("partials/header", { pageTitle: "Dashboard – TaskMate", email: email }) %>
+
+<div class="dashboard">
+
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-num"><%= allCount %></span>
+      <span class="stat-lbl">Total</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num"><%= todoCount %></span>
+      <span class="stat-lbl">Pending</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num"><%= doneCount %></span>
+      <span class="stat-lbl">Done</span>
+    </div>
+  </div>
+
+  <form method="POST" action="/tasks/new" class="add-form">
+    <input
+      type="text"
+      name="label"
+      placeholder="What needs to be done?"
+      autocomplete="off"
+      required
+    />
+    <select name="priority" class="priority-select">
+      <option value="low">🟢 Low</option>
+      <option value="medium" selected>🟡 Medium</option>
+      <option value="high">🔴 High</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Add Task</button>
+  </form>
+
+  <div class="filter-tabs">
+    <a href="/tasks?filter=all"    class="tab-btn <%= filter === 'all'    ? 'active' : '' %>">All</a>
+    <a href="/tasks?filter=active" class="tab-btn <%= filter === 'active' ? 'active' : '' %>">Active</a>
+    <a href="/tasks?filter=done"   class="tab-btn <%= filter === 'done'   ? 'active' : '' %>">Done</a>
+  </div>
+
+  <% if (tasks.length === 0) { %>
+    <div class="empty-state">
+      <p class="empty-icon">📭</p>
+      <p class="empty-msg">
+        <% if (filter === 'done') { %>
+          No completed tasks yet.
+        <% } else if (filter === 'active') { %>
+          All caught up! No pending tasks.
+        <% } else { %>
+          No tasks yet. Add one above!
+        <% } %>
+      </p>
+    </div>
+  <% } else { %>
+    <ul class="task-list">
+      <% tasks.forEach(task => { %>
+        <li class="task-item <%= task.isDone ? 'is-done' : '' %> priority-<%= task.priority %>">
+
+
+          <form method="POST" action="/tasks/toggle/<%= task._id %>?filter=<%= filter %>">
+            <button type="submit" class="toggle-btn" title="<%= task.isDone ? 'Mark as pending' : 'Mark as done' %>">
+              <%= task.isDone ? '✅' : '⬜' %>
+            </button>
+          </form>
+          <div class="task-body">
+            <span class="task-label"><%= task.label %></span>
+            <span class="task-meta">
+              <span class="badge badge-<%= task.priority %>"><%= task.priority %></span>
+              <span class="task-date"><%= task.createdAt.toLocaleDateString("en-IN", { day:"numeric", month:"short" }) %></span>
+            </span>
+          </div>
+          <form method="POST" action="/tasks/remove/<%= task._id %>?filter=<%= filter %>">
+            <button type="submit" class="delete-btn" title="Delete task">🗑</button>
+          </form>
+
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+</div>
+
+<%- include("partials/footer") %>

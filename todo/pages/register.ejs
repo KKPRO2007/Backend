@@ -1,0 +1,43 @@
+<%- include("partials/header", { pageTitle: "Register – TaskMate", email: null }) %>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h1 class="auth-title">Create account</h1>
+    <p class="auth-subtitle">Start managing your tasks today</p>
+
+    <% if (error) { %>
+      <div class="alert alert-error"><%= error %></div>
+    <% } %>
+
+    <form method="POST" action="/account/register" class="auth-form">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        placeholder="you@example.com"
+        autocomplete="email"
+        required
+      />
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        placeholder="Min. 6 characters"
+        autocomplete="new-password"
+        minlength="6"
+        required
+      />
+
+      <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+    </form>
+
+    <p class="auth-switch">
+      Already have an account? <a href="/account/login">Sign in</a>
+    </p>
+  </div>
+</div>
+
+<%- include("partials/footer") %>
