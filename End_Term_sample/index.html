@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            margin: 30px;
+            background-color: #f5f5f5;
+        }
+
+        button{
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: darkblue;
+        }
+
+        table{
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        table, th, td{
+            border: 1px solid #ccc;
+        }
+
+        th, td{
+            padding: 12px;
+            text-align: center;
+        }
+
+        th{
+            background-color: #007bff;
+            color: white;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<h1>Student Details</h1>
+
+<button onclick="getStudents()">
+    Show Students
+</button>
+
+<table id="studentTable">
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Year</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    </tbody>
+
+</table>
+
+
+<script>
+
+    async function getStudents(){
+
+        try{
+
+            // Fetch API Data
+            const response = await fetch("/students/5");
+
+            // Convert into JSON
+            const data = await response.json();
+
+            const tableBody = document.querySelector("#studentTable tbody");
+
+            // Clear previous data
+            tableBody.innerHTML = "";
+
+            tableBody.innerHTML = `
+                <tr>
+                    <td>${data.id}</td>
+                    <td>${data.name}</td>
+                    <td>${data.course}</td>
+                    <td>${data.year}</td>
+                    <td>${data.email}</td>
+                </tr>
+            `;
+
+        }
+        catch(error){
+
+            console.log("Error:", error);
+        }
+    }
+
+</script>
+
+</body>
+</html>

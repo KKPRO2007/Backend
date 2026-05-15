@@ -1,0 +1,72 @@
+[
+    {
+    "id": 1,
+    "name": "Aarav Sharma",
+    "course": "B.Tech CSE",
+    "year": 2,
+    "email": "aarav.sharma@example.com"
+  },
+  {
+    "id": 2,
+    "name": "Priya Verma",
+    "course": "B.Tech IT",
+    "year": 3,
+    "email": "priya.verma@example.com"
+  },
+  {
+    "id": 3,
+    "name": "Rohan Mehta",
+    "course": "BCA",
+    "year": 1,
+    "email": "rohan.mehta@example.com"
+  },
+  {
+    "id": 4,
+    "name": "Sneha Gupta",
+    "course": "MCA",
+    "year": 2,
+    "email": "sneha.gupta@example.com"
+  },
+  {
+    "id": 5,
+    "name": "Aditya Singh",
+    "course": "B.Tech AI",
+    "year": 4,
+    "email": "aditya.singh@example.com"
+  },
+  {
+    "id": 6,
+    "name": "Kavya Nair",
+    "course": "B.Sc CS",
+    "year": 2,
+    "email": "kavya.nair@example.com"
+  },
+  {
+    "id": 7,
+    "name": "Rahul Yadav",
+    "course": "B.Tech ECE",
+    "year": 3,
+    "email": "rahul.yadav@example.com"
+  },
+  {
+    "id": 8,
+    "name": "Ananya Kapoor",
+    "course": "BCA",
+    "year": 1,
+    "email": "ananya.kapoor@example.com"
+  },
+  {
+    "id": 9,
+    "name": "Vikram Joshi",
+    "course": "M.Tech CSE",
+    "year": 1,
+    "email": "vikram.joshi@example.com"
+  },
+  {
+    "id": 10,
+    "name": "Meera Iyer",
+    "course": "B.Tech DS",
+    "year": 4,
+    "email": "meera.iyer@example.com"
+  }
+]

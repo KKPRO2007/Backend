@@ -1,6 +1,22 @@
 {
-  "products": [],
+  "products": [
+    {
+      "id": "1",
+      "name": "Laptop",
+      "price": 999,
+      "stock": 10
+    },
+    {
+      "id": "2",
+      "name": "Phone",
+      "price": 499,
+      "stock": 25
+    },
+    {
+      "id": "1777608868606"
+    }
+  ],
   "users": [],
-  "orders": [],
-  "cart": []
+  "cart": [],
+  "orders": []
 }

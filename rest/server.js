@@ -8,8 +8,7 @@ const DB_FILE = "./db.json";
 
 /* ===== Helper Functions ===== */
 const readDB = () => JSON.parse(fs.readFileSync(DB_FILE));
-const writeDB = (data) =>
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+const writeDB = (data) => fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
 const generateId = () => Date.now().toString();
 
 /* ================= PRODUCTS ================= */
@@ -37,14 +36,11 @@ app.get("/products/:id", (req, res) => {
   res.json(product);
 });
 
-// UPDATE
+// UPDATE (PUT - full replace / PATCH - partial update both handled here)
 app.put("/products/:id", (req, res) => {
   const db = readDB();
   const index = db.products.findIndex(p => p.id === req.params.id);
-
-  if (index === -1)
-    return res.status(404).json({ msg: "Product not found" });
-
+  if (index === -1) return res.status(404).json({ msg: "Product not found" });
   db.products[index] = { ...db.products[index], ...req.body };
   writeDB(db);
   res.json(db.products[index]);
@@ -63,10 +59,12 @@ app.delete("/products/:id", (req, res) => {
 // REGISTER
 app.post("/users/register", (req, res) => {
   const db = readDB();
+  const exists = db.users.find(u => u.email === req.body.email);
+  if (exists) return res.status(409).json({ msg: "Email already exists" });
   const user = { id: generateId(), ...req.body };
   db.users.push(user);
   writeDB(db);
-  res.status(201).json(user);
+  res.status(201).json({ id: user.id, name: user.name, email: user.email });
 });
 
 // LOGIN
@@ -75,10 +73,17 @@ app.post("/users/login", (req, res) => {
   const user = db.users.find(
     u => u.email === req.body.email && u.password === req.body.password
   );
-  if (!user)
-    return res.status(401).json({ msg: "Invalid credentials" });
+  if (!user) return res.status(401).json({ msg: "Invalid credentials" });
+  res.json({ msg: "Login successful", userId: user.id });
+});
 
-  res.json(user);
+// GET USER
+app.get("/users/:id", (req, res) => {
+  const db = readDB();
+  const user = db.users.find(u => u.id === req.params.id);
+  if (!user) return res.status(404).json({ msg: "User not found" });
+  const { password, ...safeUser } = user;
+  res.json(safeUser);
 });
 
 /* ================= CART ================= */
@@ -112,16 +117,33 @@ app.delete("/cart/:id", (req, res) => {
 // CREATE ORDER
 app.post("/orders", (req, res) => {
   const db = readDB();
-  const order = { id: generateId(), ...req.body };
+  const order = { id: generateId(), status: "pending", ...req.body };
   db.orders.push(order);
   writeDB(db);
   res.status(201).json(order);
 });
 
-// GET ORDER
+// GET ALL ORDERS
+app.get("/orders", (req, res) => {
+  const db = readDB();
+  res.json(db.orders);
+});
+
+// GET ONE ORDER
 app.get("/orders/:id", (req, res) => {
   const db = readDB();
   const order = db.orders.find(o => o.id === req.params.id);
+  if (!order) return res.status(404).json({ msg: "Order not found" });
+  res.json(order);
+});
+
+// UPDATE ORDER STATUS
+app.patch("/orders/:id", (req, res) => {
+  const db = readDB();
+  const order = db.orders.find(o => o.id === req.params.id);
+  if (!order) return res.status(404).json({ msg: "Order not found" });
+  order.status = req.body.status;
+  writeDB(db);
   res.json(order);
 });
 
@@ -134,7 +156,6 @@ app.delete("/orders/:id", (req, res) => {
 });
 
 /* ================= SERVER ================= */
-
 app.listen(3000, () => {
-  console.log("🚀 Server running at http://localhost:3000");
+  console.log("Server running at http://localhost:3000");
 });
